@@ -30,6 +30,15 @@ def ticketInfo(ticket):
 					<td class="tg-td0d problemDescription" colspan="3">
 						{HtmlTableUtil.html_escape(ticket["problemDescription"])}
 					</td>
+				</tr><tr>
+					<td class="tg-td0d times" colspan="3">
+						{HtmlTableUtil.html_escape("Post time: " + ticket["whenSubmit"].isoformat())}
+						{(
+							"<br/>" + HtmlTableUtil.html_escape("Time for callback: " + ticket["timeForCallBack"].isoformat())
+						) if "timeForCallBack" in ticket.keys() and ticket["timeForCallBack"] != None else (
+							""
+						)}
+					</td>
 				</tr>
 				<tr>
 					<td class="tg-td0d" colspan="2"></td>
