@@ -9,7 +9,8 @@ print("content-type:text/html\n\n")
 cgitb.enable(logdir="./.logs.txt")
 
 form = cgi.FieldStorage(environ={'REQUEST_METHOD':'POST'})
-__DEBUG = []
+
+isAdminAccount = False
 
 print("""
 <!DOCTYPE html>
@@ -140,7 +141,7 @@ try:
 	data = cursor.fetchall()
 	if len(data) > 0:
 
-
+		isAdminAccount = True
 		print("""
 			<br>
 			<form id="alter" method="post" action="viewSingleTicket.py">
@@ -176,6 +177,13 @@ except KeyError:
 	"""
 		Account is not even account.
 	"""
+
+if not isAdminAccount:
+	print("""
+		<br><br>
+		<div>Current account is not admin.</div>
+		<div>To alter data: <a href="logIn.py" onclick="CookieUtil.clearCookie()">Log in as admin.</a></div>
+	""")
 print("""
 	</body>
 
