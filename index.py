@@ -1,6 +1,27 @@
 #!/usr/bin/python3
 import cgitb
 import CookieUtil
+import pymysql
+import Connect
+
+owner = ""
+
+db = Connect.connectSql()
+try: 
+	cursor = db.cursor()
+	cursor.execute("USE db;")
+	cursor.execute(
+		(
+			"SELECT * FROM owner"
+		)
+	)
+	owner = cursor.fetchall()[0]["username"]
+	db.rollback()
+	db.close()
+except Exception:
+	db.rollback()
+	db.close()
+
 print("content-type:text/html\n\n")
 cgitb.enable()
 
@@ -45,11 +66,13 @@ print("""
 				<div><a href="logIn.py">Log in.</a></div>
 			`)
 		}
+		if (data["username"] === \"""" + owner + """\"){
+			document.write(`
+				<div><a href="modifyAccounts.py">Modify Accounts.</a></div>
+			`)
+		}
 	</script>
 
-	""")
-
-print("""
 </body>
 </html>
 """)

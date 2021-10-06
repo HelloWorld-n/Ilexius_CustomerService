@@ -71,6 +71,14 @@ try:
 					len(data) < 1
 				]
 			)
+			if len(data) < 1:
+			cursor.execute(
+				"""
+					INSERT INTO owner(username) VALUES (%s)
+				""",
+				[form["username"].value]
+			)
+				
 			accountCreated = True
 	
 	if accountCreated and not problem:

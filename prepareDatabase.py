@@ -55,6 +55,13 @@ try:
 		")"
 	)
 
+	cursor.execute(
+		"CREATE TABLE IF NOT EXISTS owner ("
+			"username VarChar(255) NOT NULL,"
+			"PRIMARY KEY(username)"
+		")"
+	)
+
 
 	print("""
 		<a href="index.py">Main</a>
