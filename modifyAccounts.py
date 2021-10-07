@@ -92,9 +92,11 @@ if True:
 	except Exception:
 		db.rollback()
 		db.close()
+	count = 0
 	for info in data:
+		count += 1
 		print("""
-			<form id="alter" method="post" action="modifyAccounts.py">
+			<form id="alter""" + str(count) + """" method="post" action="modifyAccounts.py">
 				<input hidden id="username" name="username">
 				<input hidden id="password" name="password">
 				<input hidden id="accountUsername" name="accountUsername" value=""" + info["username"] + """>
@@ -103,9 +105,8 @@ if True:
 
 					data = CookieUtil.getCookie()
 					if(data["username"]){
-						document.querySelectorAll("form#alter #username")[0].value = data["username"]
-						document.querySelectorAll("form#alter #password")[0].value = data["password"]
-						document.querySelectorAll("form#alter #password")[0].value = data["password"]
+						document.querySelectorAll("form#alter""" + str(count) + """ #username")[0].value = data["username"]
+						document.querySelectorAll("form#alter""" + str(count) + """ #password")[0].value = data["password"]
 					}
 				</script>
 				""" + ( 
