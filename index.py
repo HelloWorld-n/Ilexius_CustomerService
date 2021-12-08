@@ -48,7 +48,7 @@ print("""
 		
 		if(data["username"]){
 			document.write(`
-				<h2>Welcome, @${CookieUtil.parseCookieText(data["username"]}!</h2>
+				<h2>Welcome, @${data["username"]}!</h2>
 			`)
 		}
 	</script>
