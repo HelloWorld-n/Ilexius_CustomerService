@@ -7,11 +7,16 @@ class CookieUtil {
 			output[pair[0].split(": ")[1]] = pair.splice(1).join('=')
 		})
 		return output
+
 	}
 
 	static clearCookie() {
 		document.cookie.split(";").forEach(function (c) {
-			document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+			document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/")
 		})
+	}
+
+	static parseCookieText(text) {
+		return text.replaceAll("\\q", "\"").replaceAll("\\s", ";").replaceAll("\\\\", "\\")
 	}
 }

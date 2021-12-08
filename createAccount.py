@@ -40,18 +40,6 @@ try:
 			print("<h1 class=\"failure\">There is already user with that username.</h1>")
 			problem = True
 		
-		for testElement in [form["username"].value, form["password"].value]:
-			if problem:
-				break
-			for char in testElement:
-				if char not in Connect.BASIC_ALPHANUM:
-					print("<h1 class=\"failure\">Something contains weird characters.</h1>")
-					print("<h1 class=\"failure\">Allowed: ascii letters, digits.</h1>")
-					problem = True
-					break
-					
-			
-	
 
 		if form["password"].value != form["passwordSame"].value:
 			print("<h1 class=\"failure\">Passwords are not same. </h1>")
@@ -71,6 +59,17 @@ try:
 					len(data) < 1
 				]
 			)
+
+		for testElement in [form["username"].value, form["password"].value]:
+			if problem:
+				break
+			for char in testElement:
+				if char in "<>&\\":
+					print("<h1 class=\"failure\">Something contains weird characters.</h1>")
+					print("<h1 class=\"failure\">Allowed: letters, digits, spaces, zal.</h1>")
+					problem = True
+					break
+
 		if len(data) < 1:
 			cursor.execute(
 				"""
@@ -79,8 +78,8 @@ try:
 				[form["username"].value]
 			)
 				
-			accountCreated = True
-	
+		accountCreated = True
+
 	if accountCreated and not problem:
 		print("""
 			<h1 class="success">Success.</h1>

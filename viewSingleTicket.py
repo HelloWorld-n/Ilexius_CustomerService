@@ -4,6 +4,7 @@ import HtmlTableUtil
 import pymysql
 import datetime
 import Connect
+import CookieUtil
 
 print("content-type:text/html\n\n")
 cgitb.enable(logdir="./.logs.txt")
@@ -52,7 +53,6 @@ if True:
 					]
 				)
 				data = cursor.fetchall()
-
 				try:
 					cursor.execute(
 						(
@@ -132,8 +132,8 @@ try:
 			")"
 		),
 		[
-			form["username"].value,
-			form["password"].value,
+			CookieUtil.parseCookieText(form["username"].value),
+			CookieUtil.parseCookieText(form["password"].value),
 		]
 	)
 	db.rollback()
@@ -152,8 +152,8 @@ try:
 
 					let data = CookieUtil.getCookie()
 					if(data["username"]){
-						document.querySelectorAll("form#alter #username")[0].value = data["username"]
-						document.querySelectorAll("form#alter #password")[0].value = data["password"]
+						document.querySelectorAll("form#alter #username")[0].value = CookieUtil.parseCookieText(data["username"])
+						document.querySelectorAll("form#alter #password")[0].value = CookieUtil.parseCookieText(data["password"])
 					}
 				</script>
 				<div>
