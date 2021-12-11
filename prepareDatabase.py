@@ -26,7 +26,7 @@ print("""
 try:
 	db = Connect.connectSql()
 	cursor = db.cursor()
-			
+	cursor.execute("CREATE DATABASE db;")
 	cursor.execute("USE db;")
 	cursor.execute(
 		"CREATE TABLE IF NOT EXISTS tickets("
