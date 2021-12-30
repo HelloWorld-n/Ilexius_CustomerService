@@ -4,8 +4,8 @@
 	--bg-plus: #373832;
 	--bg-key: #141511;
 	--table-align: 2px;
-	--font-main: 'IBM 3270'， 'HackMono', 'UbuntuMono', 'Hack', 'Ubuntu Mono', 'Consolas', 'Monospace';
-	--font-monospace: 'IBM 3270'， 'HackMono', 'UbuntuMono', 'Hack', 'Ubuntu Mono', 'Consolas', 'Monospace';
+	--font-main: 'IBM 3270', 'HackMono', 'UbuntuMono', 'Hack', 'Ubuntu Mono', 'Consolas', 'Monospace';
+	--font-monospace: 'IBM 3270', 'HackMono', 'UbuntuMono', 'Hack', 'Ubuntu Mono', 'Consolas', 'Monospace';
 	--red: #F92672;
 	--orange: #FD971F;
 	--orangish: #E69F66;
@@ -15,7 +15,6 @@
 	--purple: #AE81FF;
 	--gray: #88846A;
 }
-
 
 .success {
 	color: var(--green);
