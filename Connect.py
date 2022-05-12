@@ -9,10 +9,10 @@ DOWNCASE = "abcdefghijklmnopqrstuvwxyz"
 DIGITS = "0123456789"
 BASIC_ALPHANUM = UPCASE + DOWNCASE + DIGITS
 
-HOST = "127.0.0.1"
+HOST = "::1"
 PORT = "3306"
-SQL_USERNAME = "root"
-SQL_PASSWORD = "myPassword"
+SQL_USERNAME = "the_user"
+SQL_PASSWORD = "the_pass"
 
 def connectSql():
 	return pymysql.connect(
