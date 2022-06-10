@@ -5,6 +5,7 @@ import pymysql
 import datetime
 import Connect
 import CookieUtil
+import DatabaseUtil
 
 print("content-type:text/html\n\n")
 cgitb.enable(logdir="./.logs.txt")
@@ -44,15 +45,8 @@ if True:
 			
 				cursor = db.cursor()
 				cursor.execute("USE db;")
-				cursor.execute(
-					(
-						"SELECT * FROM tickets WHERE id = %s"
-					),
-					[
-						form["id"].value,
-					]
-				)
-				data = cursor.fetchall()
+				data = DatabaseUtil.cleanDatabaseTable(cursor, "tickets", form["id"].value)
+				
 				try:
 					cursor.execute(
 						(
