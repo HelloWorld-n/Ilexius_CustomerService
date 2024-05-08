@@ -16,8 +16,8 @@ def html_table(content, tableTags=""):
 		try:
 			result += content.__html_table__()
 		except AttributeError:
-			result += html_escape(content.__str__())
-	return result + "</div>"
+			result += html_escape(str(content))
+	return f"{result}</div>"
 
 def html_escape(text):
 	return text.replace("&", "&amp").replace("<", "&lt").replace(">", "&gt;")

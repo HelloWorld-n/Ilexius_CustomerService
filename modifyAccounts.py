@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+# sourcery skip: boolean-if-exp-identity, merge-duplicate-blocks, remove-redundant-if, split-or-ifs
 import cgitb, cgi
 import CookieUtil
 import pymysql
@@ -35,7 +36,7 @@ if True:
 
 	db = Connect.connectSql()
 	try: 
-		
+
 		cursor = db.cursor()
 		cursor.execute("USE db;")
 		cursor.execute(
@@ -65,9 +66,9 @@ if True:
 				print("<h1 class=\"success\">Change succesfull.</h1>")
 			else:
 				print("<h1 class=\"failure\">Unknown command!</h1>")
-		
 
-		
+
+
 		db.commit()
 		db.close()
 	except Exception as exception:
@@ -92,9 +93,7 @@ if True:
 	except Exception:
 		db.rollback()
 		db.close()
-	count = 0
-	for info in data:
-		count += 1
+	for count, info in enumerate(data, start=1):
 		print("""
 			<form id="alter""" + str(count) + """" method="post" action="modifyAccounts.py">
 				<input hidden id="username" name="username">

@@ -1,8 +1,13 @@
 #!/bin/python3
 import pymysql
 from collections.abc import Iterable
-
+"""
+Cleans a database table by converting columns of type 'point' to a concatenated string of x and y coordinates.
+"""
 def cleanDatabaseTable(cursor, tableName, ids = None):
+	"""
+	Cleans a database table by converting columns of type 'point' to a concatenated string of x and y coordinates.
+	"""
 	cursor.execute(f"""
 		SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS 
 		WHERE TABLE_NAME = "{tableName}" AND DATA_TYPE = "point"
@@ -21,7 +26,7 @@ def cleanDatabaseTable(cursor, tableName, ids = None):
 		""")
 		cursor.execute(f"ALTER TABLE temp_{tableName} DROP COLUMN {item}")
 		cursor.execute(f"ALTER TABLE temp_{tableName} RENAME COLUMN temp_{item} TO {item}")
-	if ids == None:
+	if ids is None:
 		cursor.execute(
 			f"SELECT * FROM temp_{tableName}", 
 			[]
@@ -34,9 +39,8 @@ def cleanDatabaseTable(cursor, tableName, ids = None):
 	elif isinstance(ids, Iterable):
 		cursor.execute(
 			f"SELECT * FROM temp_{tableName} WHERE id=%s",
-			[ids]
+			ids
 		)
 	else:
 		raise KeyError(f"Arg `ids` type excepted in [NoneType, int, ∈collections.abs.Iterable], got {type(ids)}")
 	return cursor.fetchall()
-

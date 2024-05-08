@@ -3,12 +3,15 @@ from http import cookies
 import Connect
 import requests
 
+def generateCookie(key, value):
+	cookie = cookies.SimpleCookie()
+	cookie[key] = value.replace("\\", "\\\\").replace("\;", "\\s").replace("\"", "\\q")
+	cookie[key]["path"] = "/"
+	return cookie
 
-def setCookie(obj):
+def setCookie(obj) -> str:
 	for key, value in obj.items():	
-		cookie = cookies.SimpleCookie()
-		cookie[key] = value.replace("\\", "\\\\").replace("\;", "\\s").replace("\"", "\\q")
-		cookie[key]["path"] = "/"
+		cookie = generateCookie(key, value)
 		print("""
 			<script>
 				document.cookie = \"""" + str(cookie) + """\"

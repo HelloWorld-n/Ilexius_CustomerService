@@ -14,13 +14,19 @@ PORT = "3306"
 SQL_USERNAME = "the_user"
 SQL_PASSWORD = "the_pass"
 
-def connectSql():
+def connectSql(
+	host: str = HOST, 
+	port: str = PORT, 
+	username: str = SQL_USERNAME,
+	password: str = SQL_PASSWORD,
+):
 	return pymysql.connect(
-		host=HOST, 
-		port=int(PORT), 
-		user=SQL_USERNAME,
-		password=SQL_PASSWORD,
+		host=host, 
+		port=int(port), 
+		user=username,
+		password=password,
 		cursorclass=pymysql.cursors.DictCursor
 	)
+
 
 			
